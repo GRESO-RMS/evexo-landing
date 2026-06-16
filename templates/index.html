@@ -1,11 +1,564 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>EVEXO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVEXO — Crea e vendi il tuo evento in 3 minuti</title>
+<meta name="description" content="EVEXO è la piattaforma per locali, ristoranti, palestre, corsi e organizzatori di eventi. Crea l'evento, condividi il link, vendi. 2% solo su ciò che vendi, 0€ se l'evento è gratis.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+a, button {touch-action: manipulation;}
+body{font-family:'Inter',sans-serif;background:#081120;color:white;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:-200px;left:-200px;width:500px;height:500px;background:rgba(0,255,255,0.08);filter:blur(120px);z-index:0;}
+body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;height:600px;background:rgba(59,130,246,0.12);filter:blur(120px);z-index:0;}
+.container{position:relative;z-index:2;max-width:1400px;margin:auto;padding:0 40px;}
+
+/* NAVBAR */
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px 0;position:relative;}
+.navbar::after{content:'';position:absolute;left:0;right:0;top:180px;height:1px;background:rgba(255,255,255,0.08);}
+.logo{font-size:30px;font-weight:900;letter-spacing:-1px;}
+.nav-links{display:flex;align-items:center;gap:25px;}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-weight:600;transition:0.3s;font-size:15px;}
+.nav-links a:hover{color:white;}
+
+.btn-primary{background:#22d3ee;color:#081120 !important;padding:14px 24px;border-radius:14px;font-weight:800 !important;box-shadow:0 10px 40px rgba(34,211,238,0.25);border:none;cursor:pointer;font-size:15px;display:inline-block;text-decoration:none;transition:0.3s;}
+.btn-primary:hover{box-shadow:0 10px 50px rgba(34,211,238,0.4);transform:translateY(-1px);}
+.btn-secondary{border:1px solid rgba(255,255,255,0.12);padding:14px 24px;border-radius:14px;color:white !important;font-weight:700;transition:0.3s;background:transparent;cursor:pointer;font-size:15px;display:inline-block;text-decoration:none;}
+.btn-secondary:hover{background:rgba(255,255,255,0.06);}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.05fr 0.95fr;gap:70px;align-items:center;padding:36px 0 50px 0;}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#67e8f9;font-size:14px;margin-bottom:25px;}
+.hero h1{font-size:72px;line-height:0.98;letter-spacing:-3px;font-weight:900;}
+.hero h1 span{color:#22d3ee;}
+.hero p.lead{margin-top:28px;color:rgba(255,255,255,0.7);font-size:19px;line-height:1.7;max-width:600px;}
+.hero-actions{margin-top:38px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.btn-ghost{color:rgba(255,255,255,0.8);text-decoration:none;font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:8px;}
+.btn-ghost:hover{color:white;}
+.trust-row{margin-top:40px;display:flex;gap:30px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,0.65);font-size:13.5px;font-weight:600;}
+.trust-item .dot{width:8px;height:8px;border-radius:50%;background:#22d3ee;flex-shrink:0;}
+
+/* MOCKUP */
+.mockup{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:36px;padding:28px;backdrop-filter:blur(20px);box-shadow:0 20px 80px rgba(0,0,0,0.4);}
+.mockup-inner{background:#101827;border-radius:28px;padding:28px;}
+.mockup-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.live-badge{background:rgba(34,211,238,0.15);color:#67e8f9;padding:9px 16px;border-radius:999px;font-size:13px;font-weight:700;}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px;}
+.metric-card{background:rgba(255,255,255,0.04);padding:20px;border-radius:20px;transition:0.3s;}
+@media (hover: hover) {.metric-card:hover{transform:translateY(-3px);}}
+.metric-card span{color:rgba(255,255,255,0.5);font-size:13px;}
+.metric-card strong{display:block;font-size:34px;margin-top:8px;}
+.mockup-list{display:flex;flex-direction:column;gap:12px;}
+.mockup-item{background:rgba(255,255,255,0.04);border-radius:18px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;transition:0.3s;}
+@media (hover: hover) {.mockup-item:hover{transform:translateX(4px);}}
+.mockup-item strong{font-size:15px;}
+.mockup-item small{display:block;color:rgba(255,255,255,0.5);margin-top:4px;font-size:12.5px;}
+/* SECTION HEAD */
+.section-head{text-align:center;margin-bottom:60px;}
+.section-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#67e8f9;font-size:13px;font-weight:700;margin-bottom:20px;}
+.section-head h2{font-size:46px;font-weight:900;letter-spacing:-2px;line-height:1.1;}
+.section-head p{margin-top:16px;color:rgba(255,255,255,0.6);font-size:18px;max-width:620px;margin-inline:auto;}
+
+/* AUDIENCE */
+.audience{padding:90px 0;}
+.audience-grid{display:grid;grid-template-columns:repeat(5, 1fr);gap:18px;}
+.audience-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:28px 18px;text-align:center;transition:0.3s;}
+@media (hover: hover) {.audience-card:hover{transform:translateY(-6px);border-color:rgba(34,211,238,0.35);background:rgba(255,255,255,0.06);}}
+.audience-icon{font-size:34px;margin-bottom:14px;}
+.audience-card h4{font-size:15px;font-weight:800;margin-bottom:6px;}
+.audience-card p{color:rgba(255,255,255,0.55);font-size:12.5px;line-height:1.5;}
+
+/* DEMO VIDEO */
+.demo{padding:90px 0;}
+.demo-wrap{display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;}
+.video-frame{position:relative;border-radius:26px;overflow:hidden;background:linear-gradient(135deg, rgba(34,211,238,0.15), rgba(59,130,246,0.18));border:1px solid rgba(255,255,255,0.1);aspect-ratio:16/10;box-shadow:0 25px 70px rgba(0,0,0,0.45);}
+.video-frame video, .video-frame iframe{width:100%;height:100%;object-fit:cover;border:none;display:block;}
+.video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;text-decoration:none;}
+.play-btn{width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,0.95);display:flex;align-items:center;justify-content:center;box-shadow:0 15px 40px rgba(0,0,0,0.35);transition:0.3s;}
+.play-btn:hover{transform:scale(1.08);}
+.play-btn svg{width:24px;height:24px;margin-left:3px;}
+.video-placeholder span{color:rgba(255,255,255,0.85);font-weight:700;font-size:15px;}
+.steps-list{display:flex;flex-direction:column;gap:26px;}
+.step-item{display:flex;gap:18px;align-items:flex-start;}
+.step-num{width:42px;height:42px;border-radius:14px;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.3);color:#22d3ee;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;flex-shrink:0;}
+.step-item h4{font-size:18px;font-weight:800;margin-bottom:5px;}
+.step-item p{color:rgba(255,255,255,0.6);font-size:14.5px;line-height:1.6;}
+
+/* DISRUPT FEATURES */
+.disrupt{padding:90px 0;}
+.disrupt-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:30px;padding:50px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-bottom:28px;backdrop-filter:blur(14px);}
+.disrupt-card.reverse .disrupt-visual{order:2;}
+.disrupt-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(244,114,182,0.12);color:#f472b6;font-size:12.5px;font-weight:800;margin-bottom:18px;}
+.disrupt-card h3{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:16px;line-height:1.15;}
+.disrupt-card p.desc{color:rgba(255,255,255,0.65);font-size:16px;line-height:1.7;margin-bottom:20px;}
+.disrupt-list{display:flex;flex-direction:column;gap:12px;}
+.disrupt-list div{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,0.75);font-size:14.5px;}
+.disrupt-list div::before{content:'✓';color:#22d3ee;font-weight:900;flex-shrink:0;}
+.disrupt-visual{background:#0d1726;border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:24px;}
+/* PRICING */
+.pricing{padding:90px 0;}
+.pricing-box{background:linear-gradient(135deg, rgba(34,211,238,0.1), rgba(59,130,246,0.12));border:1px solid rgba(255,255,255,0.1);border-radius:36px;padding:60px;backdrop-filter:blur(20px);}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+.price-tag{font-size:80px;font-weight:900;letter-spacing:-3px;line-height:1;}
+.price-tag span{font-size:28px;color:rgba(255,255,255,0.6);font-weight:700;}
+.price-sub{margin-top:14px;color:rgba(255,255,255,0.65);font-size:16px;line-height:1.6;max-width:420px;}
+.price-points{display:flex;flex-direction:column;gap:16px;}
+.price-point{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,0.05);border-radius:16px;padding:18px 20px;}
+.price-point-icon{font-size:22px;flex-shrink:0;}
+.price-point h4{font-size:15.5px;font-weight:800;margin-bottom:4px;}
+.price-point p{color:rgba(255,255,255,0.6);font-size:13.5px;line-height:1.5;}
+.compare-line{margin-top:30px;padding-top:30px;border-top:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);font-size:14px;line-height:1.7;}
+.compare-line strong{color:#67e8f9;}
+
+/* FEATURE GRID (minor) */
+.features{padding:90px 0;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.feature-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:30px;transition:0.35s;backdrop-filter:blur(14px);}
+@media (hover: hover) {.feature-card:hover{transform:translateY(-6px);border-color:rgba(34,211,238,0.3);}}
+.feature-icon{font-size:36px;margin-bottom:16px;}
+.feature-card h3{font-size:20px;margin-bottom:10px;font-weight:800;}
+.feature-card p{color:rgba(255,255,255,0.6);line-height:1.7;font-size:14.5px;}
+
+/* CTA */
+.cta{padding-bottom:110px;}
+.cta-box{background:linear-gradient(135deg, rgba(34,211,238,0.12), rgba(59,130,246,0.14));border:1px solid rgba(255,255,255,0.08);border-radius:40px;padding:70px;text-align:center;backdrop-filter:blur(20px);}
+.cta-box h2{font-size:54px;line-height:1.05;font-weight:900;letter-spacing:-3px;}
+.cta-box p{margin-top:22px;color:rgba(255,255,255,0.7);font-size:19px;line-height:1.8;max-width:780px;margin-inline:auto;}
+.cta-actions{margin-top:42px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-top:30px;position:relative;z-index:2;}
+.footer-row{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start;}
+.footer-brand{font-size:20px;font-weight:800;margin-bottom:10px;}
+.footer-text{color:rgba(255,255,255,0.55);line-height:1.8;font-size:14px;max-width:700px;}
+.footer-links{display:flex;flex-direction:column;gap:12px;font-size:14px;}
+.footer-links a{color:rgba(255,255,255,0.7);text-decoration:none;}
+.footer-links a:hover{color:white;}
+.footer-bottom{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);font-size:13px;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+    .hero{grid-template-columns:1fr;padding-top:60px;}
+    .hero h1{font-size:58px;}
+    .mockup{margin-top:10px;}
+    .section-head h2,.cta-box h2{font-size:38px;}
+    .audience-grid{grid-template-columns:repeat(3,1fr);}
+    .demo-wrap{grid-template-columns:1fr;gap:40px;}
+    .disrupt-card,.disrupt-card.reverse{grid-template-columns:1fr;gap:30px;}
+    .disrupt-card.reverse .disrupt-visual{order:0;}
+    .pricing-grid{grid-template-columns:1fr;gap:36px;}
+    .price-tag{font-size:64px;}
+}
+
+@media(max-width:700px){
+    .container{padding:0 22px;}
+    .hero h1{font-size:44px;letter-spacing:-2px;}
+    .hero p.lead{font-size:17px;}
+    .navbar{flex-wrap:wrap;gap:16px;padding:20px 0;}
+    .nav-links{gap:14px;flex-wrap:wrap;}
+    .nav-links a{font-size:14px;}
+    .audience-grid{grid-template-columns:repeat(2,1fr);}
+    .cta-box{padding:40px 24px;}
+    .cta-box h2{font-size:32px;}
+    .pricing-box{padding:32px 24px;}
+    .disrupt-card{padding:30px 24px;}
+    .metric-grid{grid-template-columns:1fr 1fr;}
+    .trust-row{gap:18px;}
+}
+
+</style>
 </head>
 <body>
-    <h1>EVEXO</h1>
-    <p>La piattaforma per gestire prenotazioni eventi.</p>
+
+<div class="container">
+
+<header class="navbar">
+    <div class="logo"><img src="/static/images/logoevexo_nosfondo.png" alt="EVEXO" style="height:200px; filter:brightness(0) invert(1); display:block;"></div>
+    <div class="nav-links">
+        <a href="#per-chi">Per chi</a>
+        <a href="#demo">Come funziona</a>
+        <a href="#prezzi">Prezzi</a>
+        <a href="/login">Login</a>
+        <a href="/signup" class="btn-primary">Registrati gratis</a>
+    </div>
+</header>
+
+<section class="hero">
+    <div>
+        <div class="hero-tag">✨ Piattaforma per eventi, corsi e prenotazioni</div>
+
+        <h1>Crea e vendi<br>il tuo evento<br><span>in 3 minuti.</span></h1>
+
+        <p class="lead">
+            EVEXO è la piattaforma per locali, ristoranti, palestre, corsi e organizzatori
+            che vogliono vendere eventi e prenotazioni online senza commissioni assurde
+            né configurazioni complicate.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/signup" class="btn-primary">Registrati gratis</a>
+            <a href="#demo" class="btn-ghost">▶ Guarda come funziona</a>
+        </div>
+
+        <div class="trust-row">
+            <div class="trust-item"><span class="dot"></span> 2% solo su ciò che vendi</div>
+            <div class="trust-item"><span class="dot"></span> 0€ se l'evento è gratis</div>
+            <div class="trust-item"><span class="dot"></span> Nessun canone se non vendi</div>
+        </div>
+    </div>
+
+    <div class="mockup">
+        <div class="mockup-inner">
+
+            <div class="mockup-top">
+                <div>
+                    <div style="color:rgba(255,255,255,0.5); font-size:13px;">Evento</div>
+                    <div style="font-size:24px; font-weight:800; margin-top:5px;">Serata DJ-set in Terrazza</div>
+                </div>
+                <div class="live-badge">LIVE</div>
+            </div>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <span>Prenotazioni</span>
+                    <strong>38</strong>
+                </div>
+                <div class="metric-card">
+                    <span>Incassi</span>
+                    <strong>€760</strong>
+                </div>
+            </div>
+
+            <div class="mockup-list">
+                <div class="mockup-item">
+                    <div>
+                        <strong>Gruppo Sara + 5</strong>
+                        <small>Pagamento separato via link</small>
+                    </div>
+                    <div style="color:#67e8f9; font-weight:700;">Confermato</div>
+                </div>
+                <div class="mockup-item">
+                    <div>
+                        <strong>Saldo automatico</strong>
+                        <small>Addebito programmato</small>
+                    </div>
+                    <div style="color:#22c55e; font-weight:700;">09:00</div>
+                </div>
+                <div class="mockup-item">
+                    <div>
+                        <strong>Cancellazione gestita</strong>
+                        <small>Policy applicata automaticamente</small>
+                    </div>
+                    <div style="color:#f472b6; font-weight:700;">Attivo</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="audience" id="per-chi">
+    <div class="section-head">
+        <div class="section-tag">A chi serve</div>
+        <h2>Pensato per chi vende esperienze,<br>non solo biglietti.</h2>
+        <p>Se organizzi qualcosa che le persone devono prenotare e pagare, EVEXO è fatto per te.</p>
+    </div>
+
+    <div class="audience-grid">
+        <div class="audience-card">
+            <div class="audience-icon">🎉</div>
+            <h4>Locali & discoteche</h4>
+            <p>Serate, tavoli, liste e ingressi a pagamento.</p>
+        </div>
+        <div class="audience-card">
+            <div class="audience-icon">🍽️</div>
+            <h4>Ristoranti</h4>
+            <p>Cene a tema, eventi speciali, menu degustazione.</p>
+        </div>
+        <div class="audience-card">
+            <div class="audience-icon">🧘</div>
+            <h4>Corsi & istruttori</h4>
+            <p>Yoga, fitness, lezioni singole o ricorrenti.</p>
+        </div>
+        <div class="audience-card">
+            <div class="audience-icon">🗺️</div>
+            <h4>Tour & attività</h4>
+            <p>Esperienze, visite guidate, escursioni a numero limitato.</p>
+        </div>
+        <div class="audience-card">
+            <div class="audience-icon">🥳</div>
+            <h4>Eventi privati</h4>
+            <p>Feste, compleanni, gruppi e raccolta partecipanti.</p>
+        </div>
+    </div>
+</section>
+
+<section class="demo" id="demo">
+    <div class="demo-wrap">
+
+        <a href="#" class="video-frame" id="demoVideoFrame">
+            <div class="video-placeholder">
+                <div class="play-btn">
+                    <svg viewBox="0 0 24 24" fill="#081120"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+                <span>Guarda la demo — 90 secondi</span>
+            </div>
+            <!--
+              Quando il video è pronto, sostituire questo blocco con:
+              <video controls poster="anteprima.jpg">
+                  <source src="demo-evexo.mp4" type="video/mp4">
+              </video>
+              oppure un iframe YouTube/Vimeo.
+            -->
+        </a>
+
+        <div>
+            <div class="section-tag">Come funziona</div>
+            <h2 style="font-size:38px; font-weight:900; letter-spacing:-1px; margin-bottom:30px;">
+                Dalla creazione alla vendita,<br>in tre passaggi.
+            </h2>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h4>Crei l'evento</h4>
+                        <p>Nome, data, prezzo, immagine. Bastano pochi campi per andare online.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h4>Copi il link</h4>
+                        <p>Ogni evento ha una pagina di prenotazione pronta, senza bisogno di un sito.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h4>Vendi ovunque</h4>
+                        <p>Condividi su Instagram, WhatsApp o sul tuo sito. EVEXO gestisce il resto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="disrupt">
+    <div class="section-head">
+        <div class="section-tag">Quello che ci rende diversi</div>
+        <h2>Funzioni che (quasi) nessuno ha.</h2>
+        <p>Non sono solo "feature in più" — risolvono problemi reali che oggi si gestiscono ancora a mano.</p>
+    </div>
+
+    <div class="disrupt-card">
+        <div>
+            <div class="disrupt-badge">🚀 Esclusiva EVEXO</div>
+            <h3>I gruppi pagano da soli, ognuno per sé.</h3>
+            <p class="desc">
+                Crea una prenotazione di gruppo, condividi un link, e lascia che ogni
+                partecipante prenoti e paghi la propria quota. Niente più "ti faccio
+                il bonifico dopo" tra amici, niente conti da fare a mano.
+            </p>
+            <div class="disrupt-list">
+                <div>Un solo link condiviso per tutto il gruppo</div>
+                <div>Ogni persona paga la propria parte in autonomia</div>
+                <div>Tu vedi sempre chi ha pagato e chi manca</div>
+            </div>
+        </div>
+        <div class="disrupt-visual">
+            <div class="mockup-item" style="margin-bottom:12px;">
+                <div><strong>Gruppo "Addio al nubilato"</strong><small>8 partecipanti</small></div>
+                <div style="color:#67e8f9; font-weight:700;">6/8 pagati</div>
+            </div>
+            <div class="mockup-item" style="margin-bottom:12px;">
+                <div><strong>Giulia</strong><small>Pagato — Carta •••• 4521</small></div>
+                <div style="color:#22c55e; font-weight:700;">✓</div>
+            </div>
+            <div class="mockup-item">
+                <div><strong>Marco</strong><small>In attesa di pagamento</small></div>
+                <div style="color:#f59e0b; font-weight:700;">⏳</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="disrupt-card reverse">
+        <div>
+            <div class="disrupt-badge">⚙️ Configurazione avanzata</div>
+            <h3>Politiche di pagamento e cancellazione su misura.</h3>
+            <p class="desc">
+                Acconto del 30% dieci giorni prima, saldo automatico, carta a garanzia,
+                penali progressive in caso di cancellazione tardiva. Configuri la regola
+                una volta, EVEXO la applica sempre, senza che tu debba ricordartelo.
+            </p>
+            <div class="disrupt-list">
+                <div>Acconti, saldi e addebiti programmati in automatico</div>
+                <div>Penali di cancellazione calcolate da sole</div>
+                <div>Carta salvata a garanzia, senza addebito immediato</div>
+            </div>
+        </div>
+        <div class="disrupt-visual">
+            <div class="mockup-item" style="margin-bottom:12px;">
+                <div><strong>Acconto 30%</strong><small>10 giorni prima dell'evento</small></div>
+                <div style="color:#67e8f9; font-weight:700;">Attivo</div>
+            </div>
+            <div class="mockup-item" style="margin-bottom:12px;">
+                <div><strong>Cancellazione gratuita</strong><small>Fino a 7 giorni prima</small></div>
+                <div style="color:#22c55e; font-weight:700;">✓</div>
+            </div>
+            <div class="mockup-item">
+                <div><strong>Penale 50%</strong><small>Da 3 a 7 giorni prima</small></div>
+                <div style="color:#f472b6; font-weight:700;">Regola</div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pricing" id="prezzi">
+    <div class="section-head">
+        <div class="section-tag">Prezzi</div>
+        <h2>Semplice come dovrebbe essere.</h2>
+        <p>Nessun abbonamento da pagare se non vendi nulla. Guadagni tu, guadagniamo noi.</p>
+    </div>
+
+    <div class="pricing-box">
+        <div class="pricing-grid">
+            <div>
+                <div class="price-tag">2<span>% per prenotazione</span></div>
+                <p class="price-sub">
+                    Si applica su tutte le prenotazioni gestite da EVEXO — incluse quelle
+                    cancellate — sia che il pagamento sia digitale sia che avvenga in loco.
+                    Nessun costo fisso mensile, nessuna sorpresa in fattura.
+                </p>
+
+                <div class="compare-line">
+                    Altre piattaforme ti fanno pagare un <strong>abbonamento fisso</strong>
+                    anche nei mesi in cui non vendi nulla. Con EVEXO, se non vendi,
+                    non paghi.
+                </div>
+            </div>
+
+            <div class="price-points">
+                <div class="price-point">
+                    <div class="price-point-icon">🆓</div>
+                    <div>
+                        <h4>Eventi gratuiti? Sempre gratis.</h4>
+                        <p>Se il tuo evento è a ingresso libero, EVEXO non applica nessuna commissione.</p>
+                    </div>
+                </div>
+                <div class="price-point">
+                    <div class="price-point-icon">📄</div>
+                    <div>
+                        <h4>Fatturazione trasparente</h4>
+                        <p>Ricevi una nota proforma mensile chiara, con il dettaglio di ogni prenotazione.</p>
+                    </div>
+                </div>
+                <div class="price-point">
+                    <div class="price-point-icon">💳</div>
+                    <div>
+                        <h4>Pagamenti gestiti da Stripe</h4>
+                        <p>I tuoi incassi arrivano direttamente sul tuo conto, in sicurezza.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="features">
+    <div class="section-head">
+        <div class="section-tag">E molto altro</div>
+        <h2>Tutto quello che serve, già incluso.</h2>
+        <p>Più lo usi, più scopri quanto può semplificarti la gestione.</p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Dashboard e analytics</h3>
+            <p>Incassi, prenotazioni e performance dei tuoi eventi sempre sotto controllo, in tempo reale.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎟️</div>
+            <h3>Gestione completa evento</h3>
+            <p>Prenotazioni, disponibilità, check-in e comunicazioni in un solo posto.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔁</div>
+            <h3>Eventi ricorrenti</h3>
+            <p>Crea una serie di eventi — ogni settimana, ogni mese — in un'unica configurazione.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🏷️</div>
+            <h3>Codici sconto</h3>
+            <p>Promozioni e prezzi dedicati per chi vuoi tu, senza complicazioni.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📡</div>
+            <h3>Canali di acquisizione</h3>
+            <p>Scopri da dove arrivano davvero le tue prenotazioni — sito, social o passaparola.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🏢</div>
+            <h3>Multi-struttura</h3>
+            <p>Gestisci più location o sedi da un unico account, senza duplicare il lavoro.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="cta-box">
+        <h2>Inizia a vendere il tuo<br>prossimo evento oggi.</h2>
+        <p>
+            Configura il tuo evento, condividi il link e lascia che EVEXO gestisca
+            prenotazioni, gruppi e pagamenti per te.
+        </p>
+        <div class="cta-actions">
+            <a href="/signup" class="btn-primary">Registrati gratis</a>
+            <a href="/login" class="btn-secondary">Accedi</a>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-row">
+            <div>
+                <div class="footer-brand"><img src="/static/images/logoevexo_nosfondo.png" alt="EVEXO" style="height:20px; filter:brightness(0) invert(1); display:block; margin-bottom:6px;"></div>
+                <div class="footer-text">
+                    EVEXO è una piattaforma sviluppata e gestita da <strong>GRESO S.R.L.</strong>
+                    <br><br>
+                    GRESO S.R.L. – Via Antonio Vivaldi 4/39, 20024 Garbagnate Milanese (MI)
+                    <br>
+                    P.IVA / C.F. 12972480961 · REA MI-2695982
+                    <br>
+                    Capitale Sociale € 10.000
+                    <br>
+                    PEC: <a href="mailto:greso@pec.it" style="color:#67e8f9;text-decoration:none;">greso@pec.it</a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <a href="/login">Login</a>
+                <a href="/signup">Registrati</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Termini di servizio</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 EVEXO · Tutti i diritti riservati
+        </div>
+    </div>
+</footer>
+
+
 </body>
 </html>
