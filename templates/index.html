@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<!-- Consent Mode: stato di default NEGATO finché l'utente non accetta dal banner cookie -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied',
+  'wait_for_update': 500
+});
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18248119576"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'AW-18248119576');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EVEXO — Crea e vendi il tuo evento in 3 minuti</title>
@@ -588,6 +606,7 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
                 <a href="https://www.app.evexo.eu/signup">Registrati</a>
                 <a href="#" onclick="openLegalModal('privacy'); return false;">Privacy Policy</a>
                 <a href="#" onclick="openLegalModal('terms'); return false;">Termini di servizio</a>
+                <a href="#" onclick="reopenCookieBanner(); return false;">Gestisci preferenze cookie</a>
             </div>
         </div>
 
@@ -596,6 +615,120 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
         </div>
     </div>
 </footer>
+
+<div class="cookie-banner hidden" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Consenso cookie">
+    <div class="cookie-banner-text">
+        Usiamo cookie tecnici necessari al funzionamento del sito e, solo con il tuo consenso, cookie di misurazione per capire come viene usata la pagina.
+        <a href="#" onclick="openLegalModal('privacy'); return false;">Leggi la Privacy Policy</a>.
+    </div>
+    <div class="cookie-banner-actions">
+        <button type="button" class="btn-secondary" onclick="setCookieConsent(false)">Rifiuta</button>
+        <button type="button" class="btn-primary" onclick="setCookieConsent(true)">Accetta tutti</button>
+    </div>
+</div>
+
+<style>
+.cookie-banner{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:3000;
+    background:#0d1726;
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding:20px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    flex-wrap:wrap;
+    box-shadow:0 -10px 40px rgba(0,0,0,0.4);
+}
+.cookie-banner.hidden{ display:none; }
+.cookie-banner-text{
+    color:rgba(255,255,255,0.75);
+    font-size:13.5px;
+    line-height:1.6;
+    max-width:760px;
+    flex:1 1 320px;
+}
+.cookie-banner-text a{ color:#67e8f9; text-decoration:underline; }
+.cookie-banner-actions{
+    display:flex;
+    gap:12px;
+    flex-shrink:0;
+}
+.cookie-banner-actions button{ font-family:inherit; }
+@media(max-width:700px){
+    .cookie-banner{ padding:18px 20px; justify-content:flex-start; }
+    .cookie-banner-actions{ width:100%; }
+    .cookie-banner-actions .btn-primary, .cookie-banner-actions .btn-secondary{ flex:1; text-align:center; padding:12px 16px; font-size:14px; }
+}
+</style>
+
+<script>
+function applyStoredConsent() {
+    var consent = localStorage.getItem('evexo_cookie_consent');
+    var banner = document.getElementById('cookieBanner');
+    if (consent === 'granted') {
+        gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+        });
+    } else if (consent === null) {
+        banner.classList.remove('hidden');
+    }
+}
+
+function setCookieConsent(granted) {
+    localStorage.setItem('evexo_cookie_consent', granted ? 'granted' : 'denied');
+    if (granted) {
+        gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+        });
+    }
+    document.getElementById('cookieBanner').classList.add('hidden');
+}
+
+function reopenCookieBanner() {
+    document.getElementById('cookieBanner').classList.remove('hidden');
+}
+
+document.addEventListener('DOMContentLoaded', applyStoredConsent);
+</script>
+
+<div id="privacyPolicyStaticContent" style="display:none;">
+    <p style="margin-bottom:14px;"><strong>Ambito di applicazione</strong><br>
+    Questa informativa riguarda esclusivamente il sito vetrina www.evexo.eu, usato per presentare il servizio EVEXO. Non riguarda l'applicazione app.evexo.eu, dove avviene la registrazione, la creazione di eventi, le prenotazioni e i pagamenti: per quella parte del servizio si applica un'informativa privacy distinta.</p>
+
+    <p style="margin-bottom:14px;"><strong>Titolare del trattamento</strong><br>
+    GRESO S.R.L. — Via Antonio Vivaldi 4/39, 20024 Garbagnate Milanese (MI)<br>
+    P.IVA / C.F. 12972480961 — REA MI-2695982<br>
+    PEC: <a href="mailto:greso@pec.it" style="color:#67e8f9;">greso@pec.it</a></p>
+
+    <p style="margin-bottom:14px;"><strong>Dati raccolti e finalità</strong><br>
+    Il sito www.evexo.eu non richiede registrazione e non contiene form che raccolgono dati personali direttamente: il pulsante "Registrati gratis" porta su app.evexo.eu, dove si applica l'informativa specifica dell'app. Su questo sito vengono trattati solo dati raccolti tramite cookie e tecnologie simili, per: funzionamento tecnico del sito (memorizzare la scelta espressa sul banner cookie); misurazione delle conversioni pubblicitarie tramite il tag Google Ads, attivo solo con consenso; caricamento dei font da Google Fonts (fonts.googleapis.com / fonts.gstatic.com), che può comportare la trasmissione dell'indirizzo IP del visitatore ai server Google al momento del caricamento della pagina.</p>
+
+    <p style="margin-bottom:14px;"><strong>Base giuridica</strong><br>
+    Cookie tecnici/necessari: trattati per necessità tecnica, senza richiedere consenso. Cookie di misurazione e pubblicità (Google Ads): trattati solo previo consenso esplicito dell'utente (art. 6.1.a GDPR), espresso tramite il banner cookie ed esprimibile anche tramite "Gestisci preferenze cookie" nel footer. Il consenso è revocabile in qualsiasi momento.</p>
+
+    <p style="margin-bottom:14px;"><strong>Cookie utilizzati</strong><br>
+    • <em>evexo_cookie_consent</em> (tecnico, localStorage) — memorizza la scelta espressa sul banner cookie, fino a revoca.<br>
+    • Cookie Google Ads (es. _gcl_au, IDE e simili) — misurazione delle conversioni pubblicitarie, attivati solo con consenso, durata secondo le policy di Google.</p>
+
+    <p style="margin-bottom:14px;"><strong>Soggetti terzi coinvolti</strong><br>
+    Google Ireland Limited — fornisce il servizio di misurazione Google Ads e i font Google Fonts (informativa: policies.google.com/privacy). Render — fornisce l'hosting del sito.</p>
+
+    <p style="margin-bottom:14px;"><strong>Diritti dell'utente</strong><br>
+    Hai diritto di richiedere in qualsiasi momento accesso ai tuoi dati, rettifica, cancellazione, limitazione del trattamento, portabilità dei dati, opposizione al trattamento. Puoi esercitare questi diritti scrivendo alla PEC <a href="mailto:greso@pec.it" style="color:#67e8f9;">greso@pec.it</a>. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).</p>
+
+    <p style="margin:0;"><strong>Come gestire o revocare il consenso ai cookie</strong><br>
+    Puoi modificare la tua scelta in qualsiasi momento usando il link "Gestisci preferenze cookie" in fondo al sito, che riapre il banner.</p>
+
+    <p style="margin-top:14px; font-size:12px; color:rgba(255,255,255,0.45);">Ultimo aggiornamento: 17 giugno 2026</p>
+</div>
 
 <div class="legal-modal-overlay hidden" id="legalModalOverlay">
     <div class="legal-modal-card">
@@ -705,8 +838,15 @@ function openLegalModal(type) {
     const title = document.getElementById("legalModalTitle");
 
     title.textContent = legalTitles[type] || "Documento";
-    body.innerHTML = '<div class="legal-modal-loading">Caricamento in corso…</div>';
     overlay.classList.remove("hidden");
+
+    if (type === "privacy") {
+        // contenuto statico specifico per il sito vetrina, non più recuperato dall'app
+        body.innerHTML = document.getElementById("privacyPolicyStaticContent").innerHTML;
+        return;
+    }
+
+    body.innerHTML = '<div class="legal-modal-loading">Caricamento in corso…</div>';
 
     fetch(legalUrls[type])
         .then(res => res.text())
