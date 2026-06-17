@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EVEXO — Crea e vendi il tuo evento in 3 minuti</title>
-<meta name="description" content="EVEXO è la piattaforma per locali, ristoranti, palestre, corsi e organizzatori di eventi. Crea l'evento, condividi il link, vendi. 2% solo su ciò che vendi, 0€ se l'evento è gratis.">
+<meta name="description" content="EVEXO è la piattaforma per locali, ristoranti, palestre, corsi e organizzatori di eventi. Crea l'evento, condividi il link, vendi. 2% sulle prenotazioni, 0€ se l'evento è gratis.">
 
 <link rel="canonical" href="https://www.evexo.eu/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EVEXO">
 <meta property="og:title" content="EVEXO — Crea e vendi il tuo evento in 3 minuti">
-<meta property="og:description" content="La piattaforma per locali, ristoranti, palestre, corsi e organizzatori di eventi. Crea l'evento, condividi il link, vendi. 2% solo su ciò che vendi, 0€ se l'evento è gratis.">
+<meta property="og:description" content="La piattaforma per locali, ristoranti, palestre, corsi e organizzatori di eventi. Crea l'evento, condividi il link, vendi. 2% sulle prenotazioni, 0€ se l'evento è gratis.">
 <meta property="og:url" content="https://www.evexo.eu/">
 <meta property="og:image" content="https://www.evexo.eu/static/images/evexo-og-cover.png">
 <meta property="og:locale" content="it_IT">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EVEXO — Crea e vendi il tuo evento in 3 minuti">
-<meta name="twitter:description" content="La piattaforma per locali, ristoranti, palestre, corsi e organizzatori di eventi. 2% solo su ciò che vendi, 0€ se l'evento è gratis.">
+<meta name="twitter:description" content="La piattaforma per locali, ristoranti, palestre, corsi e organizzatori di eventi. 2% sulle prenotazioni, 0€ se l'evento è gratis.">
 <meta name="twitter:image" content="https://www.evexo.eu/static/images/evexo-og-cover.png">
 
 <script type="application/ld+json">
@@ -223,8 +223,8 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
         <a href="#per-chi">Per chi</a>
         <a href="#demo">Come funziona</a>
         <a href="#prezzi">Prezzi</a>
-        <a href="/login">Login</a>
-        <a href="/signup" class="btn-primary">Registrati gratis</a>
+        <a href="https://www.app.evexo.eu/login">Login</a>
+        <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
     </div>
 </header>
 
@@ -241,12 +241,12 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
         </p>
 
         <div class="hero-actions">
-            <a href="/signup" class="btn-primary">Registrati gratis</a>
+            <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
             <a href="#demo" class="btn-ghost">▶ Guarda come funziona</a>
         </div>
 
         <div class="trust-row">
-            <div class="trust-item"><span class="dot"></span> 2% solo su ciò che vendi</div>
+            <div class="trust-item"><span class="dot"></span> 2% sulle prenotazioni</div>
             <div class="trust-item"><span class="dot"></span> 0€ se l'evento è gratis</div>
             <div class="trust-item"><span class="dot"></span> Nessun canone se non vendi</div>
         </div>
@@ -340,21 +340,13 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
 <section class="demo" id="demo">
     <div class="demo-wrap">
 
-        <a href="#" class="video-frame" id="demoVideoFrame">
-            <div class="video-placeholder">
-                <div class="play-btn">
-                    <svg viewBox="0 0 24 24" fill="#081120"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <span>Guarda la demo — 90 secondi</span>
+        <div class="video-frame" style="aspect-ratio:16/9;">
+            <!--ARCADE EMBED START-->
+            <div style="position: relative; padding-bottom: calc(56.25%); height: 0px; width: 100%;">
+                <iframe src="https://demo.arcade.software/video/VbDWza1J1FMon0wBC9s9?embed&embed_mobile=tab&embed_desktop=inline&show_copy_link=true" title="Creare e Vendere Eventi con EVEXO in 3 Minuti" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="clipboard-write" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; color-scheme: light;"></iframe>
             </div>
-            <!--
-              Quando il video è pronto, sostituire questo blocco con:
-              <video controls poster="anteprima.jpg">
-                  <source src="demo-evexo.mp4" type="video/mp4">
-              </video>
-              oppure un iframe YouTube/Vimeo.
-            -->
-        </a>
+            <!--ARCADE EMBED END-->
+        </div>
 
         <div>
             <div class="section-tag">Come funziona</div>
@@ -470,9 +462,12 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
             <div>
                 <div class="price-tag">2<span>% per prenotazione</span></div>
                 <p class="price-sub">
-                    Si applica su tutte le prenotazioni gestite da EVEXO — incluse quelle
-                    cancellate — sia che il pagamento sia digitale sia che avvenga in loco.
+                    Si applica su tutte le prenotazioni gestite da EVEXO,
+                    sia che il pagamento sia digitale sia che avvenga in loco.
                     Nessun costo fisso mensile, nessuna sorpresa in fattura.
+                </p>
+                <p style="font-size:12px; color:rgba(255,255,255,0.4); margin-top:10px;">
+                    * Al netto delle commissioni di Stripe sulle transazioni digitali.
                 </p>
 
                 <div class="compare-line">
@@ -502,6 +497,9 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
                     <div>
                         <h4>Pagamenti gestiti da Stripe</h4>
                         <p>I tuoi incassi arrivano direttamente sul tuo conto, in sicurezza.</p>
+                        <p style="font-size:12px; color:rgba(255,255,255,0.4); font-style:italic; margin-top:6px;">
+                            Stripe prevede costi di commissione per le transazioni, non incluse nel 2% di EVEXO.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -557,8 +555,8 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
             prenotazioni, gruppi e pagamenti per te.
         </p>
         <div class="cta-actions">
-            <a href="/signup" class="btn-primary">Registrati gratis</a>
-            <a href="/login" class="btn-secondary">Accedi</a>
+            <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
+            <a href="https://www.app.evexo.eu/login" class="btn-secondary">Accedi</a>
         </div>
     </div>
 </section>
@@ -577,17 +575,15 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
                     <br>
                     P.IVA / C.F. 12972480961 · REA MI-2695982
                     <br>
-                    Capitale Sociale € 10.000
-                    <br>
                     PEC: <a href="mailto:greso@pec.it" style="color:#67e8f9;text-decoration:none;">greso@pec.it</a>
                 </div>
             </div>
 
             <div class="footer-links">
-                <a href="/login">Login</a>
-                <a href="/signup">Registrati</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Termini di servizio</a>
+                <a href="https://www.app.evexo.eu/login">Login</a>
+                <a href="https://www.app.evexo.eu/signup">Registrati</a>
+                <a href="#" onclick="openLegalModal('privacy'); return false;">Privacy Policy</a>
+                <a href="#" onclick="openLegalModal('terms'); return false;">Termini di servizio</a>
             </div>
         </div>
 
@@ -597,6 +593,135 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     </div>
 </footer>
 
+<div class="legal-modal-overlay hidden" id="legalModalOverlay">
+    <div class="legal-modal-card">
+        <div class="legal-modal-header">
+            <h3 id="legalModalTitle">Documento</h3>
+            <button type="button" class="legal-modal-close" onclick="closeLegalModal()">✕</button>
+        </div>
+        <div class="legal-modal-body" id="legalModalBody">
+            <div class="legal-modal-loading">Caricamento in corso…</div>
+        </div>
+        <div class="legal-modal-footer">
+            <button type="button" class="btn-secondary" onclick="closeLegalModal()">Chiudi</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.legal-modal-overlay{
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    background:rgba(8,17,32,0.75);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
+.legal-modal-overlay.hidden{ display:none; }
+.legal-modal-overlay:not(.hidden){ display:flex; }
+
+.legal-modal-card{
+    background:#0d1726;
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:22px;
+    max-width:680px;
+    width:100%;
+    max-height:82vh;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 30px 80px rgba(0,0,0,0.5);
+}
+
+.legal-modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 26px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.legal-modal-header h3{
+    font-size:18px;
+    font-weight:800;
+    color:white;
+}
+
+.legal-modal-close{
+    background:rgba(255,255,255,0.06);
+    border:none;
+    color:white;
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+}
+.legal-modal-close:hover{ background:rgba(255,255,255,0.12); }
+
+.legal-modal-body{
+    padding:26px;
+    overflow-y:auto;
+    color:rgba(255,255,255,0.78);
+    font-size:14.5px;
+    line-height:1.75;
+    flex:1;
+}
+
+.legal-modal-body strong{ color:white; }
+
+.legal-modal-loading{
+    color:rgba(255,255,255,0.5);
+    font-size:14px;
+    text-align:center;
+    padding:40px 0;
+}
+
+.legal-modal-footer{
+    padding:18px 26px;
+    border-top:1px solid rgba(255,255,255,0.08);
+    display:flex;
+    justify-content:flex-end;
+}
+</style>
+
+<script>
+const legalUrls = {
+    privacy: "https://www.app.evexo.eu/public/privacy-policy",
+    terms: "https://www.app.evexo.eu/public/terms-of-service"
+};
+
+const legalTitles = {
+    privacy: "Privacy Policy",
+    terms: "Termini di Servizio"
+};
+
+function openLegalModal(type) {
+    const overlay = document.getElementById("legalModalOverlay");
+    const body = document.getElementById("legalModalBody");
+    const title = document.getElementById("legalModalTitle");
+
+    title.textContent = legalTitles[type] || "Documento";
+    body.innerHTML = '<div class="legal-modal-loading">Caricamento in corso…</div>';
+    overlay.classList.remove("hidden");
+
+    fetch(legalUrls[type])
+        .then(res => res.text())
+        .then(html => {
+            // estrae solo il contenuto utile dalla pagina pubblica ricevuta
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const content = doc.querySelector(".content");
+            body.innerHTML = content ? content.innerHTML : html;
+        })
+        .catch(() => {
+            body.innerHTML = '<div class="legal-modal-loading">Impossibile caricare il documento al momento.</div>';
+        });
+}
+
+function closeLegalModal() {
+    document.getElementById("legalModalOverlay").classList.add("hidden");
+}
+</script>
 
 </body>
 </html>
