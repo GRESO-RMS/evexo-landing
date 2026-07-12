@@ -44,6 +44,16 @@ Risolve: evita le code all'ingresso gestendo pagamenti online anche automatici; 
 
 Acconto configurabile, saldo automatico, carta a garanzia, penali di cancellazione progressive. Si configura una volta, EVEXO applica la regola sempre in automatico — nessun intervento manuale alla data prevista.
 
+## Dettagli operativi importanti (per rispondere con precisione — errori da non ripetere)
+
+- **Costi di gestione EVEXO (2%) — chi li paga**: è una scelta configurabile per ogni evento, non è "assorbito per forza dal locale". Si può includerli nel prezzo (il cliente non vede nulla di separato) oppure mostrarli come costo di prevendita aggiunto e visibile al momento del pagamento (il cliente paga il 2% in più, mostrato a parte). Decide il locale, evento per evento.
+- **Eventi ricorrenti**: si può modificare l'intera serie in un colpo solo, oppure una singola data all'interno della ricorrenza (es. cambiare prezzo/orario solo per una data specifica), senza rompere le altre occorrenze.
+- **Stripe non è "già pronto dentro" EVEXO**: il locale deve creare un proprio account Stripe in autonomia — EVEXO fornisce il link e guida passo passo nella procedura. Una volta creato l'account Stripe con i propri dati bancari, si collega a EVEXO. Non è un servizio unico integrato senza passaggi da fare.
+- **Gruppi — il meccanismo esatto**: chi prenota il gruppo (il capogruppo) riceve un link via email e lo condivide con gli altri partecipanti. Ogni partecipante apre il link e completa la propria prenotazione e il proprio pagamento in autonomia — il capogruppo non raccoglie lui i soldi degli altri, e non "aggiunge nomi" per conto loro. Il capogruppo vede sempre chi ha già prenotato/pagato.
+- **Tavolate/gruppi a un evento**: stesso meccanismo — il cliente prenota la tavolata (gruppo), riceve il link via email, lo condivide. I partecipanti hanno un periodo di tempo limitato per completare la propria prenotazione; se il tempo scade senza che tutti abbiano completato, EVEXO libera automaticamente gli spazi non confermati. Il locale non deve rincorrere nessuno né ricordare a nessuno di pagare — è autogestito dal sistema.
+- **Check-in all'arrivo del cliente**: si fa dalla lista prenotazioni dell'evento in EVEXO, oppure scansionando il QR code incluso nella mail di conferma della prenotazione. **Il check-in non ha alcun effetto sui costi di gestione EVEXO**: il 2% si applica comunque sulla prenotazione pagata, anche se il cliente non si presenta (no-show) — non è mai legato alla presenza fisica all'evento.
+- **Hostess Page**: esiste una pagina dedicata con la lista di tutti i prenotati a un evento (quante persone, se hanno pagato, tavolo assegnato se impostato), pensata per chi fa accoglienza all'ingresso — è anche stampabile, utile se non si ha un dispositivo mobile a disposizione al check-in.
+
 ## Prezzi
 
 - **2% per prenotazione gestita da EVEXO**, sia digitale che in loco. Nessun canone fisso mensile nel piano attuale (esiste una predisposizione tecnica per futuri piani a pagamento con canone, non ancora attivi).
