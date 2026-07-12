@@ -103,11 +103,11 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .btn-secondary:hover{background:rgba(255,255,255,0.06);}
 
 /* HERO */
-.hero{text-align:center;padding:36px 0 30px 0;max-width:760px;margin:0 auto;}
+.hero{text-align:center;padding:36px 0 30px 0;max-width:1040px;margin:0 auto;}
 .hero-tag{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#67e8f9;font-size:14px;margin-bottom:25px;}
-.hero h1{font-size:72px;line-height:0.98;letter-spacing:-3px;font-weight:900;}
+.hero h1{font-size:44px;line-height:1.1;letter-spacing:-1.5px;font-weight:900;white-space:normal;}
 .hero h1 span{color:#22d3ee;}
-.hero p.lead{margin:28px auto 0 auto;color:rgba(255,255,255,0.7);font-size:19px;line-height:1.7;max-width:560px;}
+.hero p.lead{margin:22px auto 0 auto;color:rgba(255,255,255,0.7);font-size:19px;line-height:1.6;max-width:none;}
 .trust-row{margin-top:28px;display:flex;gap:30px;flex-wrap:wrap;justify-content:center;}
 .trust-item{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,0.65);font-size:13.5px;font-weight:600;}
 .trust-item .dot{width:8px;height:8px;border-radius:50%;background:#22d3ee;flex-shrink:0;}
@@ -224,7 +224,7 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
 
 /* RESPONSIVE */
 @media(max-width:1100px){
-    .hero h1{font-size:58px;}
+    .hero h1{font-size:38px;}
     .section-head h2,.cta-box h2{font-size:38px;}
     .audience-grid{grid-template-columns:repeat(3,1fr);}
     .demo-wrap{grid-template-columns:1fr;gap:40px;}
@@ -237,7 +237,7 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
 
 @media(max-width:700px){
     .container{padding:0 22px;}
-    .hero h1{font-size:44px;letter-spacing:-2px;}
+    .hero h1{font-size:32px;letter-spacing:-1px;}
     .hero p.lead{font-size:17px;}
     .navbar{flex-wrap:wrap;gap:16px;padding:20px 0;}
     .logo img{height:56px !important;}
@@ -272,11 +272,10 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
 <section class="hero">
     <div class="hero-tag">✨ Piattaforma per eventi, corsi e prenotazioni</div>
 
-    <h1>Crea e vendi<br>il tuo evento<br><span>in 3 minuti.</span></h1>
+    <h1>Crea e vendi il tuo evento <span>in 3 minuti.</span></h1>
 
     <p class="lead">
-        Non sai da dove iniziare? Chiedilo a EVY: ti spiega come funziona EVEXO
-        in base a quello che ti serve davvero.
+        Non sai da dove iniziare? Chiedilo a EVY.
     </p>
 
     <div class="trust-row">
@@ -878,7 +877,14 @@ function appendEvyMessage(role, text){
         div.textContent = text;
     } else {
         div.className = 'msg-evy';
-        div.innerHTML = '<span class="who">EVY</span>' + text.replace(/</g,"&lt;");
+        const who = document.createElement('span');
+        who.className = 'who';
+        who.textContent = 'EVY';
+        const body = document.createElement('div');
+        body.className = 'body';
+        body.textContent = text;
+        div.appendChild(who);
+        div.appendChild(body);
     }
     box.appendChild(div);
     box.scrollTop = box.scrollHeight;
@@ -919,11 +925,11 @@ async function sendAskEvy(){
         });
         const data = await res.json();
         const reply = data.reply || "Non sono riuscita a rispondere, riprova tra poco.";
-        pending.innerHTML = '<span class="who">EVY</span>' + reply.replace(/</g,"&lt;");
+        pending.querySelector('.body').textContent = reply;
         evyConversation.push({role: 'assistant', content: reply});
         document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
     } catch(e){
-        pending.innerHTML = '<span class="who">EVY</span>Errore di connessione, riprova tra poco.';
+        pending.querySelector('.body').textContent = 'Errore di connessione, riprova tra poco.';
     }
 
     renderEvyFollowups(defaultFollowups);

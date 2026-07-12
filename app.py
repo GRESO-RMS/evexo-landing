@@ -59,7 +59,8 @@ def ask_evy():
         )
         return jsonify({"reply": reply})
 
-    except Exception:
+    except Exception as e:
+        print(f"[EVY ERROR] {repr(e)}")
         return jsonify({"error": "Errore nel contattare EVY. Riprova tra poco."}), 500
 
 
