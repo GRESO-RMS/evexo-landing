@@ -2,9 +2,91 @@
 <html lang="it">
 <head>
 <!-- Consent Mode: stato di default NEGATO finché l'utente non accetta dal banner cookie -->
+<!-- MODAL AUDIENCE CHAT -->
+<div id="audienceModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#0d1b2a;border:1px solid rgba(255,255,255,0.12);border-radius:24px;width:100%;max-width:560px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+        <div style="padding:20px 22px 16px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:8px;height:8px;border-radius:50%;background:#22d3ee;display:inline-block;"></span>
+                <span style="color:#22d3ee;font-weight:800;font-size:13px;">EVY · Assistente EVEXO</span>
+            </div>
+            <button onclick="closeAudienceModal()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:22px;cursor:pointer;line-height:1;">×</button>
+        </div>
+        <div id="audienceModalMessages" style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;"></div>
+        <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:10px;">
+            <input type="text" id="audienceModalInput" placeholder="Scrivi una domanda..."
+                style="flex:1;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);border-radius:12px;outline:none;color:white;font-size:15px;font-family:'Inter',sans-serif;padding:10px 14px;"
+                onkeydown="if(event.key==='Enter')sendAudienceModal()">
+            <button onclick="sendAudienceModal()" style="background:#22d3ee;color:#081120;border:none;width:42px;height:42px;border-radius:12px;font-size:16px;font-weight:900;cursor:pointer;">↗</button>
+        </div>
+    </div>
+</div>
+
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
+
+function openAudienceChat(question) {
+    document.getElementById('audienceModal').style.display = 'flex';
+    document.getElementById('audienceModalMessages').innerHTML = '';
+    addAudienceMsg(question, 'user');
+    askAudienceEvy(question);
+}
+
+function closeAudienceModal() {
+    document.getElementById('audienceModal').style.display = 'none';
+}
+
+function addAudienceMsg(text, who) {
+    const box = document.getElementById('audienceModalMessages');
+    const div = document.createElement('div');
+    if (who === 'user') {
+        div.style.cssText = 'background:rgba(34,211,238,0.12);border-radius:16px 16px 4px 16px;padding:12px 16px;font-size:14.5px;margin-left:auto;max-width:80%;line-height:1.5;color:white;';
+    } else if (who === 'evy') {
+        div.innerHTML = '<span style="color:#22d3ee;font-weight:800;font-size:12px;display:block;margin-bottom:5px;">EVY</span>' + text;
+        div.style.cssText = 'background:#101827;border:1px solid rgba(255,255,255,0.08);border-radius:16px 16px 16px 4px;padding:14px 16px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,0.88);max-width:88%;';
+    } else {
+        div.innerHTML = '⏳';
+        div.id = 'audienceTyping';
+        div.style.cssText = 'color:rgba(255,255,255,0.4);font-size:14px;';
+    }
+    div.setAttribute('data-who', who);
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return div;
+}
+
+async function askAudienceEvy(question) {
+    addAudienceMsg('', 'typing');
+    try {
+        const res = await fetch('/api/ask-evy', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({message: question, history: []})
+        });
+        const data = await res.json();
+        const typing = document.getElementById('audienceTyping');
+        if (typing) typing.remove();
+        addAudienceMsg(data.reply || 'Non ho capito, riprova.', 'evy');
+    } catch(e) {
+        const typing = document.getElementById('audienceTyping');
+        if (typing) typing.remove();
+        addAudienceMsg('Errore di connessione, riprova.', 'evy');
+    }
+}
+
+function sendAudienceModal() {
+    const input = document.getElementById('audienceModalInput');
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    addAudienceMsg(q, 'user');
+    askAudienceEvy(q);
+}
+
+document.getElementById('audienceModal').addEventListener('click', function(e) {
+    if (e.target === this) closeAudienceModal();
+});
 gtag('consent', 'default', {
   'ad_storage': 'denied',
   'ad_user_data': 'denied',
@@ -113,8 +195,8 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .trust-item .dot{width:8px;height:8px;border-radius:50%;background:#22d3ee;flex-shrink:0;}
 
 /* EVY ASK PANEL */
-.chat-panel{max-width:640px;margin:34px auto 0 auto;text-align:left;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:22px;backdrop-filter:blur(20px);overflow:hidden;display:flex;flex-direction:column;}
-.chat-empty{padding:26px 22px 18px 22px;}
+.chat-panel{max-width:640px;margin:34px auto 0 auto;text-align:left;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:22px;backdrop-filter:blur(20px);overflow:hidden;display:flex;flex-direction:column;padding-top:14px;}
+.chat-empty{padding:0;}
 .chat-messages{max-height:340px;overflow-y:auto;padding:20px 20px 6px 20px;display:none;flex-direction:column;gap:14px;}
 .chat-messages.active{display:flex;}
 .msg-user{background:rgba(34,211,238,0.12);border-radius:16px 16px 4px 16px;padding:12px 16px;font-size:14.5px;margin-left:auto;max-width:78%;line-height:1.5;}
@@ -123,9 +205,10 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .followups{display:flex;flex-wrap:wrap;gap:8px;padding:2px 20px 14px 20px;}
 .chip-sm{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.75);padding:7px 14px;border-radius:999px;font-size:13px;cursor:pointer;transition:0.2s;}
 .chip-sm:hover{background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.4);color:white;}
-.ask-box{background:rgba(255,255,255,0.04);border-top:1px solid rgba(255,255,255,0.08);padding:14px 16px;display:flex;align-items:center;gap:10px;}
-.ask-box input{flex:1;background:none;border:none;outline:none;color:white;font-size:15px;font-family:'Inter',sans-serif;padding:8px 0;}
-.ask-box input::placeholder{color:rgba(255,255,255,0.4);}
+.ask-box{background:none;border-top:none;padding:12px 16px 4px 16px;display:flex;align-items:center;gap:10px;}
+.ask-box input{flex:1;background:transparent;border:1px solid rgba(255,255,255,0.18);border-radius:12px;outline:none;color:white;font-size:15px;font-family:'Inter',sans-serif;padding:10px 14px;}
+.ask-box input::placeholder{color:rgba(255,255,255,0.45);}
+.ask-box input:focus{border-color:rgba(34,211,238,0.5);}
 .ask-send{background:#22d3ee;color:#081120;border:none;width:38px;height:38px;border-radius:12px;font-size:16px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .ask-send:hover{box-shadow:0 6px 20px rgba(34,211,238,0.35);}
 .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
@@ -149,6 +232,10 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .audience{padding:90px 0;}
 .audience-grid{display:grid;grid-template-columns:repeat(5, 1fr);gap:18px;}
 .audience-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:28px 18px;text-align:center;transition:0.3s;}
+.audience-clickable{cursor:pointer;}
+.audience-clickable:hover{border-color:rgba(34,211,238,0.4);transform:translateY(-4px);background:rgba(34,211,238,0.07);}
+.audience-cta{margin-top:12px;font-size:12.5px;color:#22d3ee;font-weight:700;opacity:0;transition:0.2s;}
+.audience-clickable:hover .audience-cta{opacity:1;}
 @media (hover: hover) {.audience-card:hover{transform:translateY(-6px);border-color:rgba(34,211,238,0.35);background:rgba(255,255,255,0.06);}}
 .audience-icon{font-size:34px;margin-bottom:14px;}
 .audience-card h4{font-size:15px;font-weight:800;margin-bottom:6px;}
@@ -285,19 +372,17 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     </div>
 
     <div class="chat-panel">
-        <div class="chat-empty" id="chatEmpty">
-            <div class="chips" id="chips">
-                <div class="chip" onclick="askEvyChip('Cosa posso fare con EVEXO?')">Cosa posso fare con EVEXO?</div>
-                <div class="chip" onclick="askEvyChip('Quanto costa?')">Quanto costa?</div>
-                <div class="chip" onclick="askEvyChip('Va bene per un ristorante con cene a tema?')">Va bene per un ristorante?</div>
-                <div class="chip" onclick="askEvyChip('Come funzionano i pagamenti di gruppo?')">Pagamenti di gruppo?</div>
-            </div>
-        </div>
+        <div class="chat-empty" id="chatEmpty"></div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="followups" id="followups"></div>
         <div class="ask-box">
             <input type="text" id="askInput" placeholder="Chiedi a EVY qualsiasi cosa su EVEXO..." onkeydown="if(event.key==='Enter')sendAskEvy()">
             <button class="ask-send" onclick="sendAskEvy()" aria-label="Invia">↗</button>
+        </div>
+        <div class="chips" id="chips" style="padding:8px 16px 14px 16px;justify-content:flex-start;">
+            <div class="chip" onclick="askEvyChip('Cosa posso fare con EVEXO?')">Cosa posso fare?</div>
+            <div class="chip" onclick="askEvyChip('Quanto costa EVEXO?')">Quanto costa?</div>
+            <div class="chip" onclick="askEvyChip('Come funzionano i pagamenti?')">Come funziona?</div>
         </div>
     </div>
     <div class="evy-tag"><span class="evy-dot"></span>EVY · il tuo assistente EVEXO</div>
@@ -312,30 +397,35 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     </div>
 
     <div class="audience-grid">
-        <div class="audience-card">
+        <div class="audience-card audience-clickable" onclick="openAudienceChat('Locali e discoteche: come posso usare EVEXO per gestire serate, tavoli e ingressi a pagamento?')">
             <div class="audience-icon">🎉</div>
             <h4>Locali & discoteche</h4>
             <p>Serate, tavoli, liste e ingressi a pagamento.</p>
+            <div class="audience-cta">Chiedi a EVY →</div>
         </div>
-        <div class="audience-card">
+        <div class="audience-card audience-clickable" onclick="openAudienceChat('Ristoranti: come posso usare EVEXO per gestire cene a tema ed eventi speciali?')">
             <div class="audience-icon">🍽️</div>
             <h4>Ristoranti</h4>
             <p>Cene a tema, eventi speciali, menu degustazione.</p>
+            <div class="audience-cta">Chiedi a EVY →</div>
         </div>
-        <div class="audience-card">
+        <div class="audience-card audience-clickable" onclick="openAudienceChat('Corsi e istruttori: come posso usare EVEXO per gestire prenotazioni di corsi di yoga, fitness o lezioni?')">
             <div class="audience-icon">🧘</div>
             <h4>Corsi & istruttori</h4>
             <p>Yoga, fitness, lezioni singole o ricorrenti.</p>
+            <div class="audience-cta">Chiedi a EVY →</div>
         </div>
-        <div class="audience-card">
+        <div class="audience-card audience-clickable" onclick="openAudienceChat('Tour e attività: come posso usare EVEXO per gestire prenotazioni di visite guidate ed escursioni?')">
             <div class="audience-icon">🗺️</div>
             <h4>Tour & attività</h4>
             <p>Esperienze, visite guidate, escursioni a numero limitato.</p>
+            <div class="audience-cta">Chiedi a EVY →</div>
         </div>
-        <div class="audience-card">
+        <div class="audience-card audience-clickable" onclick="openAudienceChat('Eventi privati: come posso usare EVEXO per organizzare feste, compleanni e raccolta partecipanti?')">
             <div class="audience-icon">🥳</div>
             <h4>Eventi privati</h4>
             <p>Feste, compleanni, gruppi e raccolta partecipanti.</p>
+            <div class="audience-cta">Chiedi a EVY →</div>
         </div>
     </div>
 </section>
