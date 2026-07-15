@@ -184,6 +184,8 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .hero-h1-cta span{color:#081120;}
 .hero-h1-desktop{display:block;}
 .mobile-cta-signup{display:none;justify-content:center;margin-top:18px;}
+.mobile-section-cta{display:none;justify-content:center;margin-bottom:32px;}
+.mobile-hero-cta{margin-top:20px;margin-bottom:0;}
 .hero h1{font-size:44px;line-height:1.1;letter-spacing:-1.5px;font-weight:900;white-space:normal;}
 .hero h1 span{color:#22d3ee;}
 .hero p.lead{margin:22px auto 0 auto;color:rgba(255,255,255,0.7);font-size:19px;line-height:1.6;max-width:none;}
@@ -333,9 +335,8 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     /* MOBILE — hero-tag senza bordo, testo più grande */
     .hero-tag{background:none;border:none;padding:4px 0;font-size:17px;font-weight:700;color:rgba(255,255,255,0.75);margin-bottom:18px;}
 
-    /* MOBILE — H1 diventa CTA */
-    .hero-h1-cta{display:block;font-size:28px;padding:18px 22px;}
-    .hero-h1-desktop{display:none;}
+    /* MOBILE — CTA ripetuti nelle sezioni */
+    .mobile-section-cta{display:flex;}
 
     /* MOBILE — nascondi trust-row (bullet points) */
     .trust-row{display:none;}
@@ -372,13 +373,11 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
 <section class="hero">
     <div class="hero-tag">✨ Piattaforma per eventi, corsi e prenotazioni</div>
 
-    <!-- Desktop H1 normale -->
-    <h1 class="hero-h1-desktop">Crea e vendi il tuo evento <span>in 3 minuti.</span></h1>
+    <h1>Crea e vendi il tuo evento <span>in 3 minuti.</span></h1>
 
-    <!-- Mobile H1 come CTA button -->
-    <a href="https://www.app.evexo.eu/signup" class="hero-h1-cta" style="text-decoration:none;">
-        Crea e vendi il tuo evento <span>in 3 minuti.</span>
-    </a>
+    <div class="mobile-section-cta mobile-hero-cta">
+        <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
+    </div>
 
     <div class="trust-row">
         <div class="trust-item"><span class="dot"></span> 2% sulle prenotazioni</div>
@@ -390,7 +389,7 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
         <div class="chat-empty" id="chatEmpty"></div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="followups" id="followups"></div>
-        <div class="evy-tag" style="padding:10px 16px 6px 16px;justify-content:flex-start;margin-top:0;"><span class="evy-dot"></span>EVY · il tuo assistente EVEXO</div>
+        <div class="evy-tag" style="padding:10px 16px 6px 16px;justify-content:center;margin-top:0;">EVY · il tuo assistente EVEXO</div>
         <div class="ask-box">
             <div class="ask-box-inner">
                 <input type="text" id="askInput" placeholder="Chiedi a EVY qualsiasi cosa su EVEXO..." onkeydown="if(event.key==='Enter')sendAskEvy()">
@@ -403,12 +402,6 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
             <div class="chip" onclick="askEvyChip('Come funzionano i pagamenti?')">Come funziona?</div>
         </div>
     </div>
-    <div class="mobile-cta-signup">
-        <a href="https://www.app.evexo.eu/signup" class="btn-primary" style="font-size:15px;padding:14px 28px;border-radius:14px;">
-            Registrati e crea il tuo evento →
-        </a>
-    </div>
-
     <div class="scrolldown" id="scrollHint">↓ oppure continua a leggere qui sotto</div>
 </section>
 <section class="audience" id="per-chi">
@@ -453,6 +446,9 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
 </section>
 
 <section class="demo" id="demo">
+    <div class="mobile-section-cta">
+        <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
+    </div>
     <div class="section-head">
         <div class="section-tag">Come funziona</div>
         <h2 style="font-size:38px; font-weight:900; letter-spacing:-1px;">
@@ -504,6 +500,9 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     </div>
 </section>
 <section class="disrupt">
+    <div class="mobile-section-cta">
+        <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
+    </div>
     <div class="section-head">
         <div class="section-tag">Quello che ci rende diversi</div>
         <h2>Funzioni che (quasi) nessuno ha.</h2>
@@ -573,6 +572,9 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     </div>
 </section>
 <section class="pricing" id="prezzi">
+    <div class="mobile-section-cta">
+        <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
+    </div>
     <div class="section-head">
         <div class="section-tag">Prezzi</div>
         <h2>Semplice come dovrebbe essere.</h2>
@@ -629,6 +631,9 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     </div>
 </section>
 <section class="features">
+    <div class="mobile-section-cta">
+        <a href="https://www.app.evexo.eu/signup" class="btn-primary">Registrati gratis</a>
+    </div>
     <div class="section-head">
         <div class="section-tag">E molto altro</div>
         <h2>Tutto quello che serve, già incluso.</h2>
