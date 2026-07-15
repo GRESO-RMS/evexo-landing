@@ -178,8 +178,12 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .btn-secondary:hover{background:rgba(255,255,255,0.06);}
 
 /* HERO */
-.hero{text-align:center;padding:36px 0 30px 0;max-width:1040px;margin:0 auto;}
-.hero-tag{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#67e8f9;font-size:14px;margin-bottom:25px;}
+.hero{text-align:center;padding:20px 0 30px 0;max-width:1040px;margin:0 auto;}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#67e8f9;font-size:16px;font-weight:600;margin-bottom:20px;}
+.hero-h1-cta{display:none;font-size:40px;line-height:1.1;letter-spacing:-1.5px;font-weight:900;background:linear-gradient(135deg,#22d3ee,#3b82f6);color:#081120 !important;border-radius:22px;padding:22px 28px;margin:0 auto 24px auto;max-width:480px;}
+.hero-h1-cta span{color:#081120;}
+.hero-h1-desktop{display:block;}
+.mobile-cta-signup{display:none;justify-content:center;margin-top:18px;}
 .hero h1{font-size:44px;line-height:1.1;letter-spacing:-1.5px;font-weight:900;white-space:normal;}
 .hero h1 span{color:#22d3ee;}
 .hero p.lead{margin:22px auto 0 auto;color:rgba(255,255,255,0.7);font-size:19px;line-height:1.6;max-width:none;}
@@ -210,7 +214,7 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .chip:hover{background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.4);color:white;}
 .evy-tag{display:flex;align-items:center;gap:6px;font-size:12px;color:#67e8f9;font-weight:700;margin-top:16px;justify-content:center;}
 .evy-dot{width:6px;height:6px;border-radius:50%;background:#67e8f9;}
-.scrolldown{text-align:center;margin-top:36px;color:rgba(255,255,255,0.35);font-size:13px;}
+.scrolldown{text-align:center;margin-top:20px;color:rgba(255,255,255,0.35);font-size:13px;}
 .mockup-list{display:flex;flex-direction:column;gap:12px;}
 .mockup-item{background:rgba(255,255,255,0.04);border-radius:18px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;transition:0.3s;}
 @media (hover: hover) {.mockup-item:hover{transform:translateX(4px);}}
@@ -223,7 +227,7 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .section-head p{margin-top:16px;color:rgba(255,255,255,0.6);font-size:18px;max-width:620px;margin-inline:auto;}
 
 /* AUDIENCE */
-.audience{padding:90px 0;}
+.audience{padding:50px 0 90px 0;}
 .audience-grid{display:grid;grid-template-columns:repeat(5, 1fr);gap:18px;}
 .audience-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:28px 18px;text-align:center;transition:0.3s;}
 .audience-clickable{cursor:pointer;}
@@ -322,8 +326,23 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
     .hero p.lead{font-size:17px;}
     .navbar{flex-wrap:wrap;gap:16px;padding:20px 0;}
     .logo img{height:56px !important;}
-    .nav-links{gap:14px;flex-wrap:wrap;}
-    .nav-links a{font-size:14px;}
+
+    /* MOBILE — nascondi nav links */
+    .nav-links{display:none;}
+
+    /* MOBILE — hero-tag senza bordo, testo più grande */
+    .hero-tag{background:none;border:none;padding:4px 0;font-size:17px;font-weight:700;color:rgba(255,255,255,0.75);margin-bottom:18px;}
+
+    /* MOBILE — H1 diventa CTA */
+    .hero-h1-cta{display:block;font-size:28px;padding:18px 22px;}
+    .hero-h1-desktop{display:none;}
+
+    /* MOBILE — nascondi trust-row (bullet points) */
+    .trust-row{display:none;}
+
+    /* MOBILE — bottone registrati sotto chat */
+    .mobile-cta-signup{display:flex;}
+
     .audience-grid{grid-template-columns:repeat(2,1fr);}
     .cta-box{padding:40px 24px;}
     .cta-box h2{font-size:32px;}
@@ -353,11 +372,13 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
 <section class="hero">
     <div class="hero-tag">✨ Piattaforma per eventi, corsi e prenotazioni</div>
 
-    <h1>Crea e vendi il tuo evento <span>in 3 minuti.</span></h1>
+    <!-- Desktop H1 normale -->
+    <h1 class="hero-h1-desktop">Crea e vendi il tuo evento <span>in 3 minuti.</span></h1>
 
-    <p class="lead">
-        Non sai da dove iniziare? Chiedilo a EVY.
-    </p>
+    <!-- Mobile H1 come CTA button -->
+    <a href="https://www.app.evexo.eu/signup" class="hero-h1-cta" style="text-decoration:none;">
+        Crea e vendi il tuo evento <span>in 3 minuti.</span>
+    </a>
 
     <div class="trust-row">
         <div class="trust-item"><span class="dot"></span> 2% sulle prenotazioni</div>
@@ -369,6 +390,7 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
         <div class="chat-empty" id="chatEmpty"></div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="followups" id="followups"></div>
+        <div class="evy-tag" style="padding:10px 16px 6px 16px;justify-content:flex-start;margin-top:0;"><span class="evy-dot"></span>EVY · il tuo assistente EVEXO</div>
         <div class="ask-box">
             <div class="ask-box-inner">
                 <input type="text" id="askInput" placeholder="Chiedi a EVY qualsiasi cosa su EVEXO..." onkeydown="if(event.key==='Enter')sendAskEvy()">
@@ -381,7 +403,11 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
             <div class="chip" onclick="askEvyChip('Come funzionano i pagamenti?')">Come funziona?</div>
         </div>
     </div>
-    <div class="evy-tag"><span class="evy-dot"></span>EVY · il tuo assistente EVEXO</div>
+    <div class="mobile-cta-signup">
+        <a href="https://www.app.evexo.eu/signup" class="btn-primary" style="font-size:15px;padding:14px 28px;border-radius:14px;">
+            Registrati e crea il tuo evento →
+        </a>
+    </div>
 
     <div class="scrolldown" id="scrollHint">↓ oppure continua a leggere qui sotto</div>
 </section>
