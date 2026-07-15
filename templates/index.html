@@ -159,9 +159,9 @@ gtag('consent', 'default', {
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 a, button {touch-action: manipulation;}
-body{font-family:'Inter',sans-serif;background:#081120;color:white;overflow-x:hidden;}
-body::before{content:'';position:fixed;top:-200px;left:-200px;width:500px;height:500px;background:rgba(0,255,255,0.08);filter:blur(120px);z-index:0;}
-body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;height:600px;background:rgba(59,130,246,0.12);filter:blur(120px);z-index:0;}
+html{overflow-x:hidden;}body{font-family:'Inter',sans-serif;background:#081120;color:white;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,255,0.07) 0%,transparent 70%);z-index:0;pointer-events:none;}
+body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,0.10) 0%,transparent 70%);z-index:0;pointer-events:none;}
 .container{position:relative;z-index:2;max-width:1400px;margin:auto;padding:0 40px;}
 
 /* NAVBAR */
@@ -188,7 +188,7 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .trust-item .dot{width:8px;height:8px;border-radius:50%;background:#22d3ee;flex-shrink:0;}
 
 /* EVY ASK PANEL */
-.chat-panel{max-width:640px;margin:34px auto 0 auto;text-align:left;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:22px;backdrop-filter:blur(20px);overflow:hidden;display:flex;flex-direction:column;padding-top:14px;}
+.chat-panel{max-width:640px;margin:34px auto 0 auto;text-align:left;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;padding-top:14px;}
 .chat-empty{padding:0;}
 .chat-messages{max-height:340px;overflow-y:auto;padding:20px 20px 6px 20px;display:none;flex-direction:column;gap:14px;}
 .chat-messages.active{display:flex;}
@@ -198,12 +198,13 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .followups{display:flex;flex-wrap:wrap;gap:8px;padding:2px 20px 14px 20px;}
 .chip-sm{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.75);padding:7px 14px;border-radius:999px;font-size:13px;cursor:pointer;transition:0.2s;}
 .chip-sm:hover{background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.4);color:white;}
-.ask-box{background:none;border-top:none;padding:12px 16px 4px 16px;display:flex;align-items:center;gap:10px;}
-.ask-box input{flex:1;background:transparent;border:1px solid rgba(255,255,255,0.18);border-radius:12px;outline:none;color:white;font-size:15px;font-family:'Inter',sans-serif;padding:10px 14px;}
-.ask-box input::placeholder{color:rgba(255,255,255,0.45);}
-.ask-box input:focus{border-color:rgba(34,211,238,0.5);}
-.ask-send{background:#22d3ee;color:#081120;border:none;width:38px;height:38px;border-radius:12px;font-size:16px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.ask-send:hover{box-shadow:0 6px 20px rgba(34,211,238,0.35);}
+.ask-box{background:none;border-top:none;padding:12px 16px 14px 16px;display:flex;align-items:center;}
+.ask-box-inner{flex:1;display:flex;align-items:center;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.22);border-radius:14px;padding:6px 8px 6px 14px;gap:8px;transition:border-color 0.2s;}
+.ask-box-inner:focus-within{border-color:rgba(34,211,238,0.55);}
+.ask-box input{flex:1;background:transparent;border:none;outline:none;color:white;font-size:15px;font-family:'Inter',sans-serif;padding:6px 0;}
+.ask-box input::placeholder{color:rgba(255,255,255,0.4);}
+.ask-send{background:#22d3ee;color:#081120;border:none;width:34px;height:34px;border-radius:10px;font-size:15px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:0.2s;}
+.ask-send:hover{background:#38e8ff;}
 .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
 .chip{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);padding:9px 16px;border-radius:999px;font-size:13.5px;cursor:pointer;transition:0.2s;}
 .chip:hover{background:rgba(34,211,238,0.1);border-color:rgba(34,211,238,0.4);color:white;}
@@ -252,7 +253,7 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 
 /* DISRUPT FEATURES */
 .disrupt{padding:90px 0;}
-.disrupt-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:30px;padding:50px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-bottom:28px;backdrop-filter:blur(14px);}
+.disrupt-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:30px;padding:50px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-bottom:28px;}
 .disrupt-card.reverse .disrupt-visual{order:2;}
 .disrupt-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(244,114,182,0.12);color:#f472b6;font-size:12.5px;font-weight:800;margin-bottom:18px;}
 .disrupt-card h3{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:16px;line-height:1.15;}
@@ -263,7 +264,7 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 .disrupt-visual{background:#0d1726;border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:24px;}
 /* PRICING */
 .pricing{padding:90px 0;}
-.pricing-box{background:linear-gradient(135deg, rgba(34,211,238,0.1), rgba(59,130,246,0.12));border:1px solid rgba(255,255,255,0.1);border-radius:36px;padding:60px;backdrop-filter:blur(20px);}
+.pricing-box{background:linear-gradient(135deg, rgba(34,211,238,0.1), rgba(59,130,246,0.12));border:1px solid rgba(255,255,255,0.1);border-radius:36px;padding:60px;}
 .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
 .price-tag{font-size:80px;font-weight:900;letter-spacing:-3px;line-height:1;}
 .price-tag span{font-size:28px;color:rgba(255,255,255,0.6);font-weight:700;}
@@ -279,7 +280,7 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 /* FEATURE GRID (minor) */
 .features{padding:90px 0;}
 .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
-.feature-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:30px;transition:0.35s;backdrop-filter:blur(14px);}
+.feature-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:30px;transition:0.35s;}
 @media (hover: hover) {.feature-card:hover{transform:translateY(-6px);border-color:rgba(34,211,238,0.3);}}
 .feature-icon{font-size:36px;margin-bottom:16px;}
 .feature-card h3{font-size:20px;margin-bottom:10px;font-weight:800;}
@@ -287,7 +288,7 @@ body::after{content:'';position:fixed;bottom:-250px;right:-200px;width:600px;hei
 
 /* CTA */
 .cta{padding-bottom:110px;}
-.cta-box{background:linear-gradient(135deg, rgba(34,211,238,0.12), rgba(59,130,246,0.14));border:1px solid rgba(255,255,255,0.08);border-radius:40px;padding:70px;text-align:center;backdrop-filter:blur(20px);}
+.cta-box{background:linear-gradient(135deg, rgba(34,211,238,0.12), rgba(59,130,246,0.14));border:1px solid rgba(255,255,255,0.08);border-radius:40px;padding:70px;text-align:center;}
 .cta-box h2{font-size:54px;line-height:1.05;font-weight:900;letter-spacing:-3px;}
 .cta-box p{margin-top:22px;color:rgba(255,255,255,0.7);font-size:19px;line-height:1.8;max-width:780px;margin-inline:auto;}
 .cta-actions{margin-top:42px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
@@ -369,8 +370,10 @@ footer{border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 60px 0;margin-
         <div class="chat-messages" id="chatMessages"></div>
         <div class="followups" id="followups"></div>
         <div class="ask-box">
-            <input type="text" id="askInput" placeholder="Chiedi a EVY qualsiasi cosa su EVEXO..." onkeydown="if(event.key==='Enter')sendAskEvy()">
-            <button class="ask-send" onclick="sendAskEvy()" aria-label="Invia">↗</button>
+            <div class="ask-box-inner">
+                <input type="text" id="askInput" placeholder="Chiedi a EVY qualsiasi cosa su EVEXO..." onkeydown="if(event.key==='Enter')sendAskEvy()">
+                <button class="ask-send" onclick="sendAskEvy()" aria-label="Invia">↗</button>
+            </div>
         </div>
         <div class="chips" id="chips" style="padding:8px 16px 14px 16px;justify-content:flex-start;">
             <div class="chip" onclick="askEvyChip('Cosa posso fare con EVEXO?')">Cosa posso fare?</div>
